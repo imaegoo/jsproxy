@@ -79,7 +79,8 @@ async function fetchHandler(e) {
     return makeRes('it works')
   default:
     // static files
-    return fetch(ASSET_URL + path)
+    const fetchRes = await fetch(ASSET_URL + path)
+    return new Response(fetchRes.body, { status: 200, headers: fetchRes.headers })
   }
 }
 
